@@ -1,4 +1,344 @@
 paths:
+  '/CoffeeShops/{id}/reviews/{fk}':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Find a related item by id for reviews.
+      operationId: CoffeeShop.prototype.__findById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    delete:
+      tags:
+        - CoffeeShop
+      summary: Delete a related item by id for reviews.
+      operationId: CoffeeShop.prototype.__destroyById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - CoffeeShop
+      summary: Update a related item by id for reviews.
+      operationId: CoffeeShop.prototype.__updateById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  '/CoffeeShops/{id}/reviewers/{fk}':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Find a related item by id for reviewers.
+      operationId: CoffeeShop.prototype.__findById__reviewers
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviewers
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Reviewer'
+      deprecated: false
+    delete:
+      tags:
+        - CoffeeShop
+      summary: Delete a related item by id for reviewers.
+      operationId: CoffeeShop.prototype.__destroyById__reviewers
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviewers
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - CoffeeShop
+      summary: Update a related item by id for reviewers.
+      operationId: CoffeeShop.prototype.__updateById__reviewers
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviewers
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Reviewer'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Reviewer'
+      deprecated: false
+  '/CoffeeShops/{id}/reviews':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Queries reviews of CoffeeShop.
+      operationId: CoffeeShop.prototype.__get__reviews
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+      deprecated: false
+    post:
+      tags:
+        - CoffeeShop
+      summary: Creates a new instance in reviews of this model.
+      operationId: CoffeeShop.prototype.__create__reviews
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    delete:
+      tags:
+        - CoffeeShop
+      summary: Deletes all reviews of this model.
+      operationId: CoffeeShop.prototype.__delete__reviews
+      parameters:
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/CoffeeShops/{id}/reviews/count':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Counts reviews of CoffeeShop.
+      operationId: CoffeeShop.prototype.__count__reviews
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/CoffeeShops/{id}/reviewers':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Queries reviewers of CoffeeShop.
+      operationId: CoffeeShop.prototype.__get__reviewers
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Reviewer'
+      deprecated: false
+    post:
+      tags:
+        - CoffeeShop
+      summary: Creates a new instance in reviewers of this model.
+      operationId: CoffeeShop.prototype.__create__reviewers
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Reviewer'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Reviewer'
+      deprecated: false
+    delete:
+      tags:
+        - CoffeeShop
+      summary: Deletes all reviewers of this model.
+      operationId: CoffeeShop.prototype.__delete__reviewers
+      parameters:
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/CoffeeShops/{id}/reviewers/count':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Counts reviewers of CoffeeShop.
+      operationId: CoffeeShop.prototype.__count__reviewers
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
   /CoffeeShops:
     post:
       tags:
@@ -387,6 +727,52 @@ paths:
             properties:
               status:
                 type: string
+      deprecated: false
+  '/Reviews/{id}/coffeeShop':
+    get:
+      tags:
+        - Review
+      summary: Fetches belongsTo relation coffeeShop.
+      operationId: Review.prototype.__get__coffeeShop
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  '/Reviews/{id}/reviewer':
+    get:
+      tags:
+        - Review
+      summary: Fetches belongsTo relation reviewer.
+      operationId: Review.prototype.__get__reviewer
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Reviewer'
       deprecated: false
   /Reviews:
     post:
@@ -838,6 +1224,82 @@ paths:
           schema:
             $ref: '#/definitions/AccessToken'
       deprecated: false
+  '/Reviewers/{id}/reviews/{fk}':
+    get:
+      tags:
+        - Reviewer
+      summary: Find a related item by id for reviews.
+      operationId: Reviewer.prototype.__findById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    delete:
+      tags:
+        - Reviewer
+      summary: Delete a related item by id for reviews.
+      operationId: Reviewer.prototype.__destroyById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - Reviewer
+      summary: Update a related item by id for reviews.
+      operationId: Reviewer.prototype.__updateById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
   '/Reviewers/{id}/accessTokens':
     get:
       tags:
@@ -909,6 +1371,100 @@ paths:
         - Reviewer
       summary: Counts accessTokens of Reviewer.
       operationId: Reviewer.prototype.__count__accessTokens
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/Reviewers/{id}/reviews':
+    get:
+      tags:
+        - Reviewer
+      summary: Queries reviews of Reviewer.
+      operationId: Reviewer.prototype.__get__reviews
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+      deprecated: false
+    post:
+      tags:
+        - Reviewer
+      summary: Creates a new instance in reviews of this model.
+      operationId: Reviewer.prototype.__create__reviews
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    delete:
+      tags:
+        - Reviewer
+      summary: Deletes all reviews of this model.
+      operationId: Reviewer.prototype.__delete__reviews
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/Reviewers/{id}/reviews/count':
+    get:
+      tags:
+        - Reviewer
+      summary: Counts reviews of Reviewer.
+      operationId: Reviewer.prototype.__count__reviews
       parameters:
         - name: where
           in: query
@@ -1392,21 +1948,6 @@ paths:
           description: Request was successful
       deprecated: false
 definitions:
-  CoffeeShop:
-    properties:
-      name:
-        description: Name of the Coffee Shop
-        type: string
-      city:
-        description: City of the Coffee Shop
-        type: string
-      id:
-        type: number
-        format: double
-    required:
-      - name
-      - city
-    additionalProperties: false
   x-any:
     properties: {}
   Review:
@@ -1424,26 +1965,16 @@ definitions:
         type: string
       id:
         $ref: '#/definitions/ObjectID'
+      coffeeShopId:
+        type: number
+        format: double
+      reviewerId:
+        $ref: '#/definitions/ObjectID'
+      publisherId:
+        $ref: '#/definitions/ObjectID'
     required:
       - date
       - comments
-    additionalProperties: false
-  AccessToken:
-    properties:
-      id:
-        type: string
-      ttl:
-        default: 1209600
-        description: time to live in seconds (2 weeks by default)
-        type: number
-        format: double
-      created:
-        type: string
-        format: date
-      userId:
-        $ref: '#/definitions/ObjectID'
-    required:
-      - id
     additionalProperties: false
   Reviewer:
     properties:
@@ -1469,8 +2000,43 @@ definitions:
         format: date
       id:
         $ref: '#/definitions/ObjectID'
+      coffeeShopId:
+        type: number
+        format: double
     required:
       - email
+    additionalProperties: false
+  CoffeeShop:
+    properties:
+      name:
+        description: Name of the Coffee Shop
+        type: string
+      city:
+        description: City of the Coffee Shop
+        type: string
+      id:
+        type: number
+        format: double
+    required:
+      - name
+      - city
+    additionalProperties: false
+  AccessToken:
+    properties:
+      id:
+        type: string
+      ttl:
+        default: 1209600
+        description: time to live in seconds (2 weeks by default)
+        type: number
+        format: double
+      created:
+        type: string
+        format: date
+      userId:
+        $ref: '#/definitions/ObjectID'
+    required:
+      - id
     additionalProperties: false
   ObjectID:
     type: string
