@@ -1,60 +1,758 @@
-swagger: '2.0'
-
-info:
-  x-ibm-name: coffeeshopreviewapp
-  version: 1.0.0
-  title: CoffeeShopReviewApp
-
-schemes:
-  - https
-host: $(catalog.host)
-basePath: /api
-
-consumes:
-  - application/json
-produces:
-  - application/json
-
-securityDefinitions:
- clientIdHeader:
-   type: apiKey
-   in: header
-   name: X-IBM-Client-Id
- clientSecretHeader:
-   in: "header"
-   name: "X-IBM-Client-Secret"
-   type: "apiKey"
-
-
-security:
- -
-   clientIdHeader: []
-   clientSecretHeader: []
-
-x-ibm-configuration:
-  testable: true
-  enforced: true
-  cors:
-    enabled: true
-  catalogs:
-    apic-dev:
-      properties:
-        runtime-url: $(TARGET_URL)
-    sb:
-      properties:
-        runtime-url: 'http://localhost:4001'
-  assembly:
-    execute:
-      - invoke:
-          target-url: $(runtime-url)$(request.path)$(request.search)
-
 paths:
-  '/Users/{id}/accessTokens/{fk}':
+  /CoffeeShops:
+    post:
+      tags:
+        - CoffeeShop
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: CoffeeShop.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+    put:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Patch an existing model instance or insert a new one into the data
+        source.
+      operationId: CoffeeShop.upsert__put_CoffeeShops
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+    patch:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Patch an existing model instance or insert a new one into the data
+        source.
+      operationId: CoffeeShop.upsert__patch_CoffeeShops
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
     get:
       tags:
-        - User
+        - CoffeeShop
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: CoffeeShop.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  /CoffeeShops/replaceOrCreate:
+    post:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Replace an existing model instance or insert a new one into the data
+        source.
+      operationId: CoffeeShop.replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  /CoffeeShops/upsertWithWhere:
+    post:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Update an existing model instance or insert a new one into the data
+        source based on the where criteria.
+      operationId: CoffeeShop.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  '/CoffeeShops/{id}/exists':
+    get:
+      tags:
+        - CoffeeShop
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'CoffeeShop.exists__get_CoffeeShops_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/CoffeeShops/{id}':
+    head:
+      tags:
+        - CoffeeShop
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'CoffeeShop.exists__head_CoffeeShops_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - CoffeeShop
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: CoffeeShop.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+    delete:
+      tags:
+        - CoffeeShop
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: CoffeeShop.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Patch attributes for a model instance and persist it into the data
+        source.
+      operationId: 'CoffeeShop.prototype.updateAttributes__put_CoffeeShops_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/CoffeeShop'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+    patch:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Patch attributes for a model instance and persist it into the data
+        source.
+      operationId: 'CoffeeShop.prototype.updateAttributes__patch_CoffeeShops_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/CoffeeShop'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  '/CoffeeShops/{id}/replace':
+    post:
+      tags:
+        - CoffeeShop
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: CoffeeShop.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  /CoffeeShops/findOne:
+    get:
+      tags:
+        - CoffeeShop
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: CoffeeShop.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/CoffeeShop'
+      deprecated: false
+  /CoffeeShops/update:
+    post:
+      tags:
+        - CoffeeShop
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: CoffeeShop.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/CoffeeShop'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /CoffeeShops/count:
+    get:
+      tags:
+        - CoffeeShop
+      summary: Count instances of the model matched by where from the data source.
+      operationId: CoffeeShop.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /Reviews:
+    post:
+      tags:
+        - Review
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Review.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    put:
+      tags:
+        - Review
+      summary: >-
+        Patch an existing model instance or insert a new one into the data
+        source.
+      operationId: Review.upsert__put_Reviews
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    patch:
+      tags:
+        - Review
+      summary: >-
+        Patch an existing model instance or insert a new one into the data
+        source.
+      operationId: Review.upsert__patch_Reviews
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    get:
+      tags:
+        - Review
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Review.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+      deprecated: false
+  /Reviews/replaceOrCreate:
+    post:
+      tags:
+        - Review
+      summary: >-
+        Replace an existing model instance or insert a new one into the data
+        source.
+      operationId: Review.replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  /Reviews/upsertWithWhere:
+    post:
+      tags:
+        - Review
+      summary: >-
+        Update an existing model instance or insert a new one into the data
+        source based on the where criteria.
+      operationId: Review.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  '/Reviews/{id}/exists':
+    get:
+      tags:
+        - Review
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Review.exists__get_Reviews_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/Reviews/{id}':
+    head:
+      tags:
+        - Review
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Review.exists__head_Reviews_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - Review
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: Review.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    delete:
+      tags:
+        - Review
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: Review.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Review
+      summary: >-
+        Patch attributes for a model instance and persist it into the data
+        source.
+      operationId: 'Review.prototype.updateAttributes__put_Reviews_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+    patch:
+      tags:
+        - Review
+      summary: >-
+        Patch attributes for a model instance and persist it into the data
+        source.
+      operationId: 'Review.prototype.updateAttributes__patch_Reviews_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  '/Reviews/{id}/replace':
+    post:
+      tags:
+        - Review
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: Review.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  /Reviews/findOne:
+    get:
+      tags:
+        - Review
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Review.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Review'
+      deprecated: false
+  /Reviews/update:
+    post:
+      tags:
+        - Review
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: Review.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Review'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /Reviews/count:
+    get:
+      tags:
+        - Review
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Review.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  '/Reviewers/{id}/accessTokens/{fk}':
+    get:
+      tags:
+        - Reviewer
       summary: Find a related item by id for accessTokens.
-      operationId: User.prototype.__findById__accessTokens
+      operationId: Reviewer.prototype.__findById__accessTokens
       parameters:
         - name: fk
           in: path
@@ -76,9 +774,9 @@ paths:
       deprecated: false
     delete:
       tags:
-        - User
+        - Reviewer
       summary: Delete a related item by id for accessTokens.
-      operationId: User.prototype.__destroyById__accessTokens
+      operationId: Reviewer.prototype.__destroyById__accessTokens
       parameters:
         - name: fk
           in: path
@@ -98,9 +796,9 @@ paths:
       deprecated: false
     put:
       tags:
-        - User
+        - Reviewer
       summary: Update a related item by id for accessTokens.
-      operationId: User.prototype.__updateById__accessTokens
+      operationId: Reviewer.prototype.__updateById__accessTokens
       parameters:
         - name: fk
           in: path
@@ -125,12 +823,12 @@ paths:
           schema:
             $ref: '#/definitions/AccessToken'
       deprecated: false
-  '/Users/{id}/accessTokens':
+  '/Reviewers/{id}/accessTokens':
     get:
       tags:
-        - User
-      summary: Queries accessTokens of User.
-      operationId: User.prototype.__get__accessTokens
+        - Reviewer
+      summary: Queries accessTokens of Reviewer.
+      operationId: Reviewer.prototype.__get__accessTokens
       parameters:
         - name: filter
           in: query
@@ -153,9 +851,9 @@ paths:
       deprecated: false
     post:
       tags:
-        - User
+        - Reviewer
       summary: Creates a new instance in accessTokens of this model.
-      operationId: User.prototype.__create__accessTokens
+      operationId: Reviewer.prototype.__create__accessTokens
       parameters:
         - name: data
           in: body
@@ -176,9 +874,9 @@ paths:
       deprecated: false
     delete:
       tags:
-        - User
+        - Reviewer
       summary: Deletes all accessTokens of this model.
-      operationId: User.prototype.__delete__accessTokens
+      operationId: Reviewer.prototype.__delete__accessTokens
       parameters:
         - name: id
           in: path
@@ -190,12 +888,12 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
-  '/Users/{id}/accessTokens/count':
+  '/Reviewers/{id}/accessTokens/count':
     get:
       tags:
-        - User
-      summary: Counts accessTokens of User.
-      operationId: User.prototype.__count__accessTokens
+        - Reviewer
+      summary: Counts accessTokens of Reviewer.
+      operationId: Reviewer.prototype.__count__accessTokens
       parameters:
         - name: where
           in: query
@@ -219,12 +917,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /Users:
+  /Reviewers:
     post:
       tags:
-        - User
+        - Reviewer
       summary: Create a new instance of the model and persist it into the data source.
-      operationId: User.create
+      operationId: Reviewer.create
       parameters:
         - name: data
           in: body
@@ -232,20 +930,20 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
     put:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Patch an existing model instance or insert a new one into the data
         source.
-      operationId: User.upsert__put_Users
+      operationId: Reviewer.upsert__put_Reviewers
       parameters:
         - name: data
           in: body
@@ -253,20 +951,20 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
     patch:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Patch an existing model instance or insert a new one into the data
         source.
-      operationId: User.upsert__patch_Users
+      operationId: Reviewer.upsert__patch_Reviewers
       parameters:
         - name: data
           in: body
@@ -274,18 +972,18 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
     get:
       tags:
-        - User
+        - Reviewer
       summary: Find all instances of the model matched by filter from the data source.
-      operationId: User.find
+      operationId: Reviewer.find
       parameters:
         - name: filter
           in: query
@@ -299,16 +997,16 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
+              $ref: '#/definitions/Reviewer'
       deprecated: false
-  /Users/replaceOrCreate:
+  /Reviewers/replaceOrCreate:
     post:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Replace an existing model instance or insert a new one into the data
         source.
-      operationId: User.replaceOrCreate
+      operationId: Reviewer.replaceOrCreate
       parameters:
         - name: data
           in: body
@@ -316,21 +1014,21 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
-  /Users/upsertWithWhere:
+  /Reviewers/upsertWithWhere:
     post:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Update an existing model instance or insert a new one into the data
         source based on the where criteria.
-      operationId: User.upsertWithWhere
+      operationId: Reviewer.upsertWithWhere
       parameters:
         - name: where
           in: query
@@ -344,19 +1042,19 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
-  '/Users/{id}/exists':
+  '/Reviewers/{id}/exists':
     get:
       tags:
-        - User
+        - Reviewer
       summary: Check whether a model instance exists in the data source.
-      operationId: 'User.exists__get_Users_{id}_exists'
+      operationId: 'Reviewer.exists__get_Reviewers_{id}_exists'
       parameters:
         - name: id
           in: path
@@ -373,12 +1071,12 @@ paths:
               exists:
                 type: boolean
       deprecated: false
-  '/Users/{id}':
+  '/Reviewers/{id}':
     head:
       tags:
-        - User
+        - Reviewer
       summary: Check whether a model instance exists in the data source.
-      operationId: 'User.exists__head_Users_{id}'
+      operationId: 'Reviewer.exists__head_Reviewers_{id}'
       parameters:
         - name: id
           in: path
@@ -397,9 +1095,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - User
+        - Reviewer
       summary: 'Find a model instance by {{id}} from the data source.'
-      operationId: User.findById
+      operationId: Reviewer.findById
       parameters:
         - name: id
           in: path
@@ -417,13 +1115,13 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
     delete:
       tags:
-        - User
+        - Reviewer
       summary: 'Delete a model instance by {{id}} from the data source.'
-      operationId: User.deleteById
+      operationId: Reviewer.deleteById
       parameters:
         - name: id
           in: path
@@ -439,11 +1137,11 @@ paths:
       deprecated: false
     put:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Patch attributes for a model instance and persist it into the data
         source.
-      operationId: 'User.prototype.updateAttributes__put_Users_{id}'
+      operationId: 'Reviewer.prototype.updateAttributes__put_Reviewers_{id}'
       parameters:
         - name: data
           in: body
@@ -451,7 +1149,7 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
         - name: id
           in: path
           description: User id
@@ -462,15 +1160,15 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
     patch:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Patch attributes for a model instance and persist it into the data
         source.
-      operationId: 'User.prototype.updateAttributes__patch_Users_{id}'
+      operationId: 'Reviewer.prototype.updateAttributes__patch_Reviewers_{id}'
       parameters:
         - name: data
           in: body
@@ -478,7 +1176,7 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
         - name: id
           in: path
           description: User id
@@ -489,16 +1187,16 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
-  '/Users/{id}/replace':
+  '/Reviewers/{id}/replace':
     post:
       tags:
-        - User
+        - Reviewer
       summary: >-
         Replace attributes for a model instance and persist it into the data
         source.
-      operationId: User.replaceById
+      operationId: Reviewer.replaceById
       parameters:
         - name: id
           in: path
@@ -512,19 +1210,19 @@ paths:
           required: false
           schema:
             description: Model instance data
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
-  /Users/findOne:
+  /Reviewers/findOne:
     get:
       tags:
-        - User
+        - Reviewer
       summary: Find first instance of the model matched by filter from the data source.
-      operationId: User.findOne
+      operationId: Reviewer.findOne
       parameters:
         - name: filter
           in: query
@@ -536,14 +1234,14 @@ paths:
         '200':
           description: Request was successful
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       deprecated: false
-  /Users/update:
+  /Reviewers/update:
     post:
       tags:
-        - User
+        - Reviewer
       summary: 'Update instances of the model matched by {{where}} from the data source.'
-      operationId: User.updateAll
+      operationId: Reviewer.updateAll
       parameters:
         - name: where
           in: query
@@ -557,7 +1255,7 @@ paths:
           required: false
           schema:
             description: An object of model property name/value pairs
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/Reviewer'
       responses:
         '200':
           description: Request was successful
@@ -570,12 +1268,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /Users/count:
+  /Reviewers/count:
     get:
       tags:
-        - User
+        - Reviewer
       summary: Count instances of the model matched by where from the data source.
-      operationId: User.count
+      operationId: Reviewer.count
       parameters:
         - name: where
           in: query
@@ -593,12 +1291,12 @@ paths:
                 type: number
                 format: double
       deprecated: false
-  /Users/login:
+  /Reviewers/login:
     post:
       tags:
-        - User
+        - Reviewer
       summary: Login a user with username/email and password.
-      operationId: User.login
+      operationId: Reviewer.login
       parameters:
         - name: credentials
           in: body
@@ -628,23 +1326,23 @@ paths:
 
             type: object
       deprecated: false
-  /Users/logout:
+  /Reviewers/logout:
     post:
       tags:
-        - User
+        - Reviewer
       summary: Logout a user with access token.
-      operationId: User.logout
+      operationId: Reviewer.logout
       parameters: []
       responses:
         '204':
           description: Request was successful
       deprecated: false
-  /Users/confirm:
+  /Reviewers/confirm:
     get:
       tags:
-        - User
+        - Reviewer
       summary: Confirm a user registration with email verification token.
-      operationId: User.confirm
+      operationId: Reviewer.confirm
       parameters:
         - name: uid
           in: query
@@ -662,12 +1360,12 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
-  /Users/reset:
+  /Reviewers/reset:
     post:
       tags:
-        - User
+        - Reviewer
       summary: Reset password for a user with email.
-      operationId: User.resetPassword
+      operationId: Reviewer.resetPassword
       parameters:
         - name: options
           in: body
@@ -678,30 +1376,43 @@ paths:
         '204':
           description: Request was successful
       deprecated: false
-  /Messages/greet:
-    get:
-      tags:
-        - Message
-      operationId: Message.greet
-      parameters:
-        - name: msg
-          in: query
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Request was successful
-          schema:
-            type: object
-            properties:
-              greeting:
-                type: string
-      deprecated: false
-
-
 definitions:
+  CoffeeShop:
+    properties:
+      name:
+        description: Name of the Coffee Shop
+        type: string
+      city:
+        description: City of the Coffee Shop
+        type: string
+      id:
+        type: number
+        format: double
+    required:
+      - name
+      - city
+    additionalProperties: false
   x-any:
     properties: {}
+  Review:
+    properties:
+      date:
+        description: Date for review submission
+        type: string
+        format: date
+      rating:
+        description: Rating scale
+        type: number
+        format: double
+      comments:
+        description: Review text
+        type: string
+      id:
+        $ref: '#/definitions/ObjectID'
+    required:
+      - date
+      - comments
+    additionalProperties: false
   AccessToken:
     properties:
       id:
@@ -715,12 +1426,11 @@ definitions:
         type: string
         format: date
       userId:
-        type: number
-        format: double
+        $ref: '#/definitions/ObjectID'
     required:
       - id
     additionalProperties: false
-  User:
+  Reviewer:
     properties:
       realm:
         type: string
@@ -743,9 +1453,51 @@ definitions:
         type: string
         format: date
       id:
-        type: number
-        format: double
+        $ref: '#/definitions/ObjectID'
     required:
       - email
     additionalProperties: false
-
+  ObjectID:
+    type: string
+    pattern: '^[a-fA-F\d]{24}$'
+basePath: /api
+swagger: '2.0'
+info:
+  x-ibm-name: coffeeshopreviewapp
+  version: 1.0.0
+  title: CoffeeShopReviewApp
+schemes:
+  - https
+host: $(catalog.host)
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)

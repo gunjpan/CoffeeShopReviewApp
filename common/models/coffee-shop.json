@@ -1,0 +1,24 @@
+{
+  "name": "CoffeeShop",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "Name of the Coffee Shop"
+    },
+    "city": {
+      "type": "string",
+      "required": true,
+      "description": "City of the Coffee Shop"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
