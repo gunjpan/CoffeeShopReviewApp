@@ -1,7 +1,3 @@
-# CoffeeShopReviewApp
-A LoopBack app to be used for step-by-step implementation workshop
-
-
 # CASCON 2016 - Workshop
 ## Close Encounter With API Connect & LoopBack
 
@@ -9,25 +5,38 @@ A LoopBack app to be used for step-by-step implementation workshop
 - We will begin with a `hello-world` LoopBack application and build fully-functioning **CoffeeShopReviewApp** -- an application, similar to popular review sites such as Yelp, to review CoffeeShops.
 
   - Following LoopBack concepts will be covered during the process:
-    - Create DataSources -- apic edit
-    - Create Models & attach to DataSources - apic edit
-    - Create Remote methods and expose them over REST API - code
-    - Model Relations - apic cli
-    - Controlling access using ACL - apic cli
-    - Create a remote hook
-    - Use boot scripts to automigrate data- code // optional
-    - Use `loopback-sdk-angular` to generate Angular client
+    - [Create DataSources](#step2-create-datasources) - apic edit
+    - [Create Models & attach to DataSources](#step3-create-models) - apic edit
+    - [Create Remote methods and expose them over REST API](#step4-create-simple-remote-method) - code
+    - [Define Model Relations](#step5-define-model-relations) - apic cli
+    - [Controlling access using ACL](#step6-define-access-controls) - apic cli
+    - [Create a remote hook](#step7-create-a-remote-hook) - code
+    - [Use boot scripts to automigrate data](#step8-use-boot-script-to-generate-sample-data) - code 
+    - [Use `loopback-sdk-angular` to generate Angular client](#step9-generate-angular-client) - lb-ng tool
 
-**Note:** We will use both: API Connect Deigner (GUI) as well as the cli toolkit for the workshop.
+**Note:** 
+> We are going to use both: API Connect Deigner (GUI) as well as the cli toolkit for the workshop.  
+
+> If you want to jump to a particular step in the workshop, clone this repo and checkout a step before the one you want to continue on.
+For example, let's say if you want to work on Step3, you can do following:
+ ```
+ $git clone git@github.com:gunjpan/CoffeeShopReviewApp.git
+ $cd CoffeeShopReviewApp && npm install
+ $git checkout step2
+ ```
+ Now, you have the project that is ready for step3 instructions
+
 
 ### Step1: create LoopBack application
   - name it `CoffeeShopReviewApp`
+ 
  ```console
   $ apic loopback
   ? What's the name of your application? CoffeeShopReviewApp
   ? Enter name of the directory to contain the project: CoffeeShopReviewApp
   ? What kind of application do you have in mind? hello-world (A project containing a controller, including a single vanilla Message and a single remote method)
 ```
+
 **Note:** Step2 & Step3 are implemented using API Designer, use `apic edit` command and login with your `Bluemix` creds
 
 ### Step2: create DataSources
@@ -79,7 +88,7 @@ A LoopBack app to be used for step-by-step implementation workshop
     - properties: default User properties
     - ds: mongoDs
 
-### Stpe4: Create Simple Remote method
+### Step4: Create Simple Remote method
   - create following remote method for `CoffeeShop` model , named `status`, in `common/coffee-shop.js`:
   ```javascript
     Coffeeshop.status = function(cb) {
@@ -121,6 +130,7 @@ We'll use `apic loopback:relation` generator to create relations.
 In our app, models are related as follows:
 
   - A coffee shop has many reviews
+  
     ```console
       ? Select the model to create the relationship from: CoffeeShop
       ? Relation type: has many
@@ -129,16 +139,20 @@ In our app, models are related as follows:
       ? Optionally enter a custom foreign key:
       ? Require a through model? Note
     ```
+  
   - A coffee shop has many reviewers.
-    ```console
+  
+  ```console
     ? Select the model to create the relationship from: CoffeeShop
     ? Relation type: has many
     ? Choose a model to create a relationship with: Reviewer
     ? Enter the property name for the relation: reviewers
     ? Optionally enter a custom foreign key:
     ? Require a through model? No
-    ```
+  ```
+  
   - A review belongs to a coffee shop.
+  
     ```console
     ? Select the model to create the relationship from: Review
     ? Relation type: belongs to
@@ -146,6 +160,7 @@ In our app, models are related as follows:
     ? Enter the property name for the relation: coffeeShop
     ? Optionally enter a custom foreign key:
     ```
+    
   - A review belongs to a reviewer.
     ```console
     ? Select the model to create the relationship from: Review
@@ -154,6 +169,7 @@ In our app, models are related as follows:
     ? Enter the property name for the relation: reviewer
     ? Optionally enter a custom foreign key: publisherId
     ```
+    
   - A reviewer has many reviews.
     ```console
     ? Select the model to create the relationship from: Reviewer
@@ -177,6 +193,7 @@ We are going to set up access control for the `Review` model. The access control
 We will use `apic loopback:acl` generator for applying ACL.
   steps to achieve this:
   - Deny everyone all endpoints
+  
     ```console
       ? Select the model to apply the ACL entry to: (all existing models)
       ? Select the ACL scope: All methods and properties
@@ -184,7 +201,9 @@ We will use `apic loopback:acl` generator for applying ACL.
       ? Select the role: All users
       ? Select the permission to apply: Explicitly deny access
     ```
+    
   - Allow everyone to read reviews
+    
     ```console
       ? Select the model to apply the ACL entry to: Review
       ? Select the ACL scope: All methods and properties
@@ -192,7 +211,9 @@ We will use `apic loopback:acl` generator for applying ACL.
       ? Select the role: All users
       ? Select the permission to apply: Explicitly grant access
     ```
+    
   - Allow authenticated users to write a review
+  
     ```console
       ? Select the model to apply the ACL entry to: Review
       ? Select the ACL scope: A single method
@@ -200,7 +221,9 @@ We will use `apic loopback:acl` generator for applying ACL.
       ? Select the role: Any authenticated user
       ? Select the permission to apply: Explicitly grant access
     ```
+    
   - Enable the publisher of a review (its "owner") to make any changes to it
+    
     ```console
       ? Select the model to apply the ACL entry to: Review
       ? Select the ACL scope: All methods and properties
@@ -324,6 +347,7 @@ To generate the Angular services for a LoopBack application, we will use the Ang
   - First, disable `server/boot/root.js` by deleting or renaming to some other extension than `.js`
   - Create the `client/js/services` directory, if you don’t already have it (by using the mkdir command, for example).
   - Update `middleware.json` to use `loopback#static` middleware and configure it to serve client files from `client` directory:
+    
     ```json
       "files": {
       "loopback#static": {
@@ -331,6 +355,7 @@ To generate the Angular services for a LoopBack application, we will use the Ang
       }
     },
     ```
+    
   - Now, in the project root directory, enter the lb-ng command as follows:
 
   ```console
@@ -338,6 +363,7 @@ $ mkdir -p client/js/services
 $ lb-ng server/server.js client/js/services/lb-services.js
 
   ```
+  
   **Note:**
 
   >The `lb-ng` tool does the “heavy lifting” of creating the client JavaScript API that works with your LoopBack back-end. However, you still need to create the HTML/CSS and client JavaScript code that actually calls into this AngularJS API and defines the client-side functionality and appearance of your app. In general, creating this part of the app is entirely up to you. This tutorial includes an example of such a client implementation that you can use to understand the process.
