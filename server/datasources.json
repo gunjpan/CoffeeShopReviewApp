@@ -2,5 +2,23 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mongoDs": {
+    "host": "demo.strongloop.com",
+    "port": 27017,
+    "database": "getting_started_intermediate",
+    "password": "L00pBack",
+    "name": "mongoDs",
+    "connector": "mongodb",
+    "user": "demo"
+  },
+  "mysqlDs": {
+    "host": "demo.strongloop.com",
+    "port": 3306,
+    "database": "getting_started_intermediate",
+    "password": "L00pBack",
+    "name": "mysqlDs",
+    "connector": "mysql",
+    "user": "demo"
   }
 }
