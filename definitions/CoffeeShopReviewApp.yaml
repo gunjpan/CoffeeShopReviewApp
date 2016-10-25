@@ -373,6 +373,21 @@ paths:
                 type: number
                 format: double
       deprecated: false
+  /CoffeeShops/status:
+    get:
+      tags:
+        - CoffeeShop
+      operationId: CoffeeShop.status
+      parameters: []
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+      deprecated: false
   /Reviews:
     post:
       tags:
