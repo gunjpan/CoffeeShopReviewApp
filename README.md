@@ -79,7 +79,7 @@ For example, let's say if you want to work on Step3, you can do following:
     - base: PersistedModel
     - properties:
       - `date` - type: date, required: true
-      - `rating` - type: number
+      - `rating` - type: number, required: true
       - `comments` - type: string, required: true
     - ds: mongoDs
 
